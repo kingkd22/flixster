@@ -2,8 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
-    background-color: black;
+    padding: 2rem 1rem;
+    min-height: 200px;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, black, dimgray, #000000);
+    color: #f0f0f0;
 }
 
 header {

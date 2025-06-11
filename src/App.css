@@ -5,11 +5,22 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
 }
 
-h1, h2 {
-  color: #ffffff;
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-image: linear-gradient(to right, #2d2d2d, #1e1e1e);
+  width: 100%;
+}
+
+.appHeader h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 button {

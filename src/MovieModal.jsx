@@ -1,0 +1,50 @@
+import { useEffect, useState } from "react";
+import "./MovieModal.css"
+
+const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
+
+    const [runtime, setRuntime] = useState(null)
+    const [genres, setGenres] = useState([])
+
+    const url = `https://api.themoviedb.org/3/movie/${keyId}?language=en-US`;
+    const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTRhNmZlNWVhZjM0YzliMWMyZjU1OTVkM2E5NjM0ZSIsIm5iZiI6MTc0OTUxMDExMi44MzMsInN1YiI6IjY4NDc2N2UwYjJjNGIyYTNjYTI5MzNiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FeYMhPJ4tSfYRFRfKWNgfOC3LLum71gyOzfVUWxvBXw'
+        }
+    };
+
+    useEffect(() => {
+        if (!keyId) return;
+
+        fetch(url, options)
+            .then(res => res.json())
+            .then(data => {
+                console.log('Fetched Data:')
+                setRuntime(data.runtime);
+                setGenres(data.genres || []);
+            })
+            .catch(err => console.error('API Error:', err));
+    }, [keyId]);
+
+    const runtimeHours = (minutes) => {
+        if (!minutes) return "N/A"
+        return `${Math.floor(minutes / 60)}h ${minutes % 60}m`
+    }
+    return (
+        <div className="modal" onClick={onClose}>
+            <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+                <h2>{title}</h2>
+                <img src={image} alt={`${title} Poster`} />
+                <p><strong>Release Date:</strong> {releaseDate}</p>
+                <p><strong>Overview:</strong> {overview}</p>
+                <p><strong>Genres:</strong> {genres.map(g => g.name).join(". ")}</p>
+                <p><strong>Runtime:</strong> {runtimeHours(runtime)}</p>
+                <button onClick={onClose}>Close</button>
+            </div>
+        </div>
+    )
+}
+
+export default MovieModal
