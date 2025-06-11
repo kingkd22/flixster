@@ -2,27 +2,44 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  color: white;
-  padding: 20px;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0;
 }
 
-@media (max-width: 600px) {
-  .movie-card {
+h1, h2 {
+  color: #ffffff;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .MovieCard {
+    width: 45%;
+  }
+
+  .SearchForm input {
     width: 100%;
   }
+}
 
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
+@media (max-width: 480px) {
+  .MovieCard {
+    width: 90%;
   }
 
-  .search-bar form {
+  .SearchForm {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .SearchForm button {
+    width: 100%
   }
 }

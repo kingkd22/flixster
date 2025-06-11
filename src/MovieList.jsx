@@ -50,9 +50,18 @@ function MovieList() {
         fetchFunction();
     }
 
+    function resetPage() {
+        const homePage = 1;
+        setPageNumber(homePage);
+        const cleared = '';
+        setSearchQuery(cleared)
+        fetchFunction();
+    }
+
     return (
         <div className="MovieList">
             <header>
+                <button onClick={resetPage} className="resetButton">Home</button>
                 <SearchForm onSearch={handleSearch} />
             </header>
 

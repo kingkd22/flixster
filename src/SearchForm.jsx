@@ -8,8 +8,10 @@ function SearchForm({ onSearch }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (input.trim() !=="") {
-            onSearch(input.trim());
+        const trimmedInput = input.trim();
+        if (trimmedInput !== "") {
+            onSearch(trimmedInput);
+            setInput("");
         }
     }
 
@@ -19,7 +21,10 @@ function SearchForm({ onSearch }) {
         }
     }
 
-    
+    const handleClear = (event) => {
+        setInput("")
+    }
+
     return (
         <div className="SearchForm">
             <form onSubmit={handleSubmit}>
