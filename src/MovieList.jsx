@@ -1,4 +1,5 @@
 import MovieCard from "./MovieCard";
+import SearchForm from "./SearchForm";
 import { useEffect, useState } from "react";
 import "./MovieList.css"
 
@@ -7,11 +8,15 @@ function MovieList() {
     let [movies, setMovies] = useState([])
     let [page, setPageNumber] = useState(1)
     const apiKey = import.meta.env.VITE_APP_API_KEY;
+    const [searchQuery, setSearchQuery] = useState('')
 
     
-    function fetchFunction () {
+    function fetchFunction() {
 
-        const url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`;
+        const url = searchQuery
+            ? `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&page=${page}`
+            : `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`;
+        
         const options = {
             method: 'GET',
             headers: {
@@ -23,33 +28,32 @@ function MovieList() {
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                setMovies(prevMovies => [...prevMovies, ...data.results]);
+                setMovies(prevMovies => (page > 1 ? [...prevMovies, ...data.results] : data.results));
                 console.log(movies)
             })
             .catch(err => console.error(err));
-
-
 
     }
     
     useEffect(() => {
         fetchFunction()
-    }, []);
+    }, [page, searchQuery]);
 
-    function loadMore() {
-        console.log("inside load more")
-        const nextPage = page + 1;
-        setPageNumber(nextPage)
-        console.log(nextPage)
-        fetchFunction();
+    function handleSearch(query) {
+        setSearchQuery(query);
+        setPageNumber(1)
     }
 
-
+    function loadMore() {
+        const nextPage = page + 1;
+        setPageNumber(nextPage)
+        fetchFunction();
+    }
 
     return (
         <div className="MovieList">
             <header>
-                <h1>Flixster</h1>
+                <SearchForm onSearch={handleSearch} />
             </header>
 
             <main className="grid">
