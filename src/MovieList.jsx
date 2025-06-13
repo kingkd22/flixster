@@ -12,7 +12,7 @@ function MovieList({ global }) {
     const [searchQuery, setSearchQuery] = useState('')
 
     
-    const apiKey = import.meta.env.VITE_APP_API_KEY;
+    const apiKey = import.meta.env.VITE_API_KEY;
 
     
     function fetchFunction(customPage = page) {

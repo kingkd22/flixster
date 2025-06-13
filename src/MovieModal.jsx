@@ -7,7 +7,7 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
     const [genres, setGenres] = useState([])
     const [trailer, setTrailer] = useState(null)
 
-    const apiKey = import.meta.env.VITE_APP_API_KEY;
+    const apiKey = import.meta.env.VITE_API_KEY;
 
     const url = `https://api.themoviedb.org/3/movie/${keyId}?language=en-US`;
     const options = {
