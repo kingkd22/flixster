@@ -2,20 +2,73 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem;
-    min-height: 200px;
+    padding: 3rem 1rem 2rem 1rem;
+    min-height: 100vh;
     width: 100%;
     background-image: linear-gradient(to bottom right, black, dimgray, #000000);
-    color: #f0f0f0;
+    background-size: cover;
+    color: aliceblue;
 }
 
-header {
+.searchContainer {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
     align-items: center;
-    padding: 1rem;
+    margin: 1rem auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sort select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #222;
+    color: aliceblue;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.sort select:hover {
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #222;
+    color: aliceblue;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.search input:hover {
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
+}
+
+.search button {
+    background-color: #444;
+    color: aliceblue;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border:none;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search button:hover {
+    background-color: #555;
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
 }
 
 .resetButton {
@@ -29,7 +82,8 @@ header {
 }
 
 .resetButton:hover {
-    background-color: #666;
+    background-color: #555;
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
 }
 
 .grid {
@@ -52,4 +106,25 @@ header {
 
 .loadMore:hover {
     background-color: #555;
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
+}
+
+@media (max-width: 600px) {
+    .searchContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search {
+        justify-content: center;
+    }
+
+    .sort {
+        width: 100%;
+    }
+
+    .search input,
+    .search button {
+        width: 100%;
+    }
 }

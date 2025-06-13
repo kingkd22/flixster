@@ -32,20 +32,24 @@ function MovieList({ global }) {
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                const combined = customPage > 1 
+                setMovies(prevMovies => {
+                    const combined = customPage > 1 
                     ? [...prevMovies, ...data.results] 
                     : data.results;
                     
-                const uniqueMovies = Array.from(
-                    new Map(combined.map(movie => [movie.id, movie])).values()
-                );
-                const updated = uniqueMovies.map((m) => ({
-                    ...m,
-                    liked: m.liked ?? false,
-                    watched: m.watched ?? false,
-                }));
+                    const uniqueMovies = Array.from(
+                        new Map(combined.map(movie => [movie.id, movie])).values()
+                    );
+                    const updated = uniqueMovies.map((m) => ({
+                        ...m,
+                        liked: m.liked ?? false,
+                        watched: m.watched ?? false,
+                    }));
+                    setSortedMovies(updated)
+                    global(updated);
+                    return updated;
 
-                setMovies(updated);
+                })
                     
             })
             .catch(err => console.error(err));
@@ -72,6 +76,7 @@ function MovieList({ global }) {
     function loadMore() {
         const nextPage = page + 1;
         setPageNumber(nextPage);
+        fetchFunction();
     }
 
     function resetPage() {
@@ -100,39 +105,44 @@ function MovieList({ global }) {
     }
     return (
         <div className="MovieList">
-            <header>
-                <button onClick={resetPage} className="resetButton">Home</button>
-                <SearchForm onSearch={handleSearch} />
+            <div className="searchContainer">
                 <div className="sort">
                     <select onChange={(e) => setSortOption(e.target.value)}>
-                        <option value="">Sort By...</option>
+                        <option value="">Now Playing</option>
                         <option value="title">Title (A-Z)</option>
                         <option value="release_date">Release Date (Newest to Oldest)</option>
                         <option value="vote_average">Vote Average (High to Low)</option>
                     </select>
                 </div>
-            </header>
+                <div className="search">
+                    <SearchForm onSearch={handleSearch} />
+                    <button onClick={resetPage} className="resetButton">Clear</button>
+                </div>
+            </div>
 
             <main className="grid">
                 <div className="grid">
-                    {sortedMovies.map((movie) => (
-                        <MovieCard
-                            key={movie.id}
-                            id={movie.id}
-                            title={movie.title}
-                            image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                            vote={movie.vote_average}
-                            releaseDate={movie.release_date}
-                            overview={movie.overview}
-                            liked={movie.liked}
-                            watched={movie.watched}
-                            updateMovieStatus={updateMovieStatus}
-                        />
-                    ))}
+                    {sortedMovies.length > 0 ? (
+                        sortedMovies.map((movie) => (
+                            <MovieCard
+                                key={movie.id}
+                                id={movie.id}
+                                title={movie.title}
+                                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                vote={movie.vote_average}
+                                releaseDate={movie.release_date}
+                                overview={movie.overview}
+                                liked={movie.liked}
+                                watched={movie.watched}
+                                updateMovieStatus={updateMovieStatus}
+                            />
+                        ))
+                    ) : (<p className="noResults">No Results Found.</p>
+
+                    )}
                 </div>
                 <button type="button" onClick={loadMore} className="loadMore">Load More!</button>
             </main>
-
         </div>
     )
 }

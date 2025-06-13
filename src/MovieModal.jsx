@@ -5,6 +5,7 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
 
     const [runtime, setRuntime] = useState(null)
     const [genres, setGenres] = useState([])
+    const [trailer, setTrailer] = useState(null)
 
     const url = `https://api.themoviedb.org/3/movie/${keyId}?language=en-US`;
     const options = {
@@ -14,6 +15,8 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTRhNmZlNWVhZjM0YzliMWMyZjU1OTVkM2E5NjM0ZSIsIm5iZiI6MTc0OTUxMDExMi44MzMsInN1YiI6IjY4NDc2N2UwYjJjNGIyYTNjYTI5MzNiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FeYMhPJ4tSfYRFRfKWNgfOC3LLum71gyOzfVUWxvBXw'
         }
     };
+
+    const trailerUrl = `https://api.themoviedb.org/3/movie/${keyId}/videos?language=en-US`;
 
     useEffect(() => {
         if (!keyId) return;
@@ -25,7 +28,17 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
                 setRuntime(data.runtime);
                 setGenres(data.genres || []);
             })
-            .catch(err => console.error('API Error:', err));
+            .catch(err => console.error('Movie API Error:', err));
+
+        fetch(trailerUrl, options)
+            .then(res => res.json())
+            .then(data => {
+                const trailerData = data.results?.find(
+                    vid => vid.site === "YouTube" && vid.type === "Trailer"
+                );
+                setTrailer(trailerData?.key || null);
+            })
+            .catch(err => console.error("Trailer API Error", err))
     }, [keyId]);
 
     const runtimeHours = (minutes) => {
@@ -41,6 +54,18 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
                 <p><strong>Overview:</strong> {overview}</p>
                 <p><strong>Genres:</strong> {genres.map(g => g.name).join(". ")}</p>
                 <p><strong>Runtime:</strong> {runtimeHours(runtime)}</p>
+                {trailer && (
+                    <div className="trailer">
+                        <iframe width="75%" 
+                            height="315" 
+                            src={`https://www.youtube.com/embed/${trailer}`} 
+                            title="Movie Trailer" 
+                            frameBorder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowFullScreen>
+                        </iframe>
+                    </div>
+                )}
                 <button onClick={onClose}>Close</button>
             </div>
         </div>

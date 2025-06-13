@@ -14,13 +14,13 @@
 
 .modalContent {
     background-image: linear-gradient(to bottom right, #403f3f, #000000);
-    color: #f0f0f0;
+    color: aliceblue;
     margin: 5% auto;
     padding: 20px;
     border-radius: 10px;
-    width: 70%;
-    max-width: 500px;
-    max-height: 90vh;
+    width: 90%;
+    max-width: 800px;
+    max-height: 75vh;
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
     text-align: center;
     position: relative;
@@ -35,8 +35,8 @@
 }
 
 .modalContent img {
-    width: 80;
-    max-height: 600px;
+    width: 30%;
+    height: auto;
     border-radius: 8px;
     margin: 1rem 0;
     object-fit: cover;
@@ -46,6 +46,10 @@
     margin: 15px;
     color: #fff;
     font-size: 24px;
+}
+
+.trailer {
+    margin-top: 1rem;
 }
 
 .modalContent button {
