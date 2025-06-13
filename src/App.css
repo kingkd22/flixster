@@ -1,26 +1,53 @@
 .App {
   text-align: center;
+  background-image: linear-gradient(to bottom right, black, dimgray, #000000);
 }
 
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f8f8f8;
+  color:aliceblue;
+  background-image: linear-gradient(to bottom right, black, dimgray, #000000);
 }
 
-.appHeader {
+.banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-image: linear-gradient(to right, #2d2d2d, #1e1e1e);
+  padding: 20px;
   width: 100%;
+  text-align: center;
+  font-size: 2em;
+  background-image: linear-gradient(to bottom right, black, dimgray, #000000);
 }
 
-.appHeader h1 {
-  margin: 0;
-  font-size: 1.8rem;
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  background-color: #1c1c1c;
+  padding-top: 100px;
+}
+
+.sidebar-ul {
+  list-style-type: none;
+  padding: 15;
+}
+
+.sidebar-ul li {
+  margin: 20px 0;
+}
+
+.sidebar-ul a {
+  text-decoration: none;
+  color: aliceblue;
   font-weight: bold;
+}
+
+.sidebar-ul a:hover {
+  color: #ff4081
 }
 
 button {

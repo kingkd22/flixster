@@ -3,7 +3,7 @@ import SearchForm from "./SearchForm";
 import { useEffect, useState } from "react";
 import "./MovieList.css"
 
-function MovieList() {
+function MovieList({ global }) {
 
     const [movies, setMovies] = useState([])
     const [page, setPageNumber] = useState(1)
@@ -32,17 +32,21 @@ function MovieList() {
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                setMovies(prevMovies => {
-                    const combined = customPage > 1 
-                        ? [...prevMovies, ...data.results] 
-                        : data.results;
+                const combined = customPage > 1 
+                    ? [...prevMovies, ...data.results] 
+                    : data.results;
                     
-                    const uniqueMovies = Array.from(
-                        new Map(combined.map(movie => [movie.id, movie])).values()
-                    );
-                    return uniqueMovies;
+                const uniqueMovies = Array.from(
+                    new Map(combined.map(movie => [movie.id, movie])).values()
+                );
+                const updated = uniqueMovies.map((m) => ({
+                    ...m,
+                    liked: m.liked ?? false,
+                    watched: m.watched ?? false,
+                }));
+
+                setMovies(updated);
                     
-                });
             })
             .catch(err => console.error(err));
 
@@ -55,6 +59,10 @@ function MovieList() {
     useEffect(() => {
         sortMovies(movies, sortOption)
     }, [movies, sortOption])
+
+    useEffect(() => {
+        global(sortedMovies)
+    }, [sortedMovies]);
 
     function handleSearch(query) {
         setSearchQuery(query);
@@ -71,7 +79,7 @@ function MovieList() {
         setSearchQuery('');
     }
 
-    function sortMovies(movieList, option) {
+    function sortMovies(movies, option) {
         let sorted = [...movies];
 
         if (option === "title") {
@@ -85,6 +93,11 @@ function MovieList() {
         setSortedMovies(sorted);
     }
 
+    function updateMovieStatus(id, updates) {
+        setSortedMovies((prev) =>
+            prev.map((movie) =>
+            movie.id === id ? { ...movie, ...updates } : movie))
+    }
     return (
         <div className="MovieList">
             <header>
@@ -111,6 +124,9 @@ function MovieList() {
                             vote={movie.vote_average}
                             releaseDate={movie.release_date}
                             overview={movie.overview}
+                            liked={movie.liked}
+                            watched={movie.watched}
+                            updateMovieStatus={updateMovieStatus}
                         />
                     ))}
                 </div>

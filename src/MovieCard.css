@@ -39,3 +39,27 @@
     text-align: center;
     gap: 0.3rem;
 }
+
+.cardButtons button {
+    border: 2px solid white;
+    background: transparent;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    padding: 5px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+}
+
+.cardButtons button:hover {
+    transform: scale(1.2)
+}
+
+.likebutton.active {
+    border-color: red
+}
+
+.watchedbutton.active {
+    border-color: green;
+}
