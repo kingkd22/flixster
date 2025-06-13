@@ -7,12 +7,14 @@ const MovieModal =({ keyId, title, image, releaseDate, overview, onClose}) => {
     const [genres, setGenres] = useState([])
     const [trailer, setTrailer] = useState(null)
 
+    const apiKey = import.meta.env.VITE_APP_API_KEY;
+
     const url = `https://api.themoviedb.org/3/movie/${keyId}?language=en-US`;
     const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTRhNmZlNWVhZjM0YzliMWMyZjU1OTVkM2E5NjM0ZSIsIm5iZiI6MTc0OTUxMDExMi44MzMsInN1YiI6IjY4NDc2N2UwYjJjNGIyYTNjYTI5MzNiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FeYMhPJ4tSfYRFRfKWNgfOC3LLum71gyOzfVUWxvBXw'
+        Authorization: `Bearer ${apiKey}`
         }
     };
 
