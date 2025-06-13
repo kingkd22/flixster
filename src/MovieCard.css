@@ -1,7 +1,7 @@
 .card {
     width: 200px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
     background-color: #1e1e1e;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -10,17 +10,18 @@
     align-items: center;
     text-align: center;
     margin: 15px;
+    padding: 10px;
 }
 
 .card:hover {
     transform: scale(1.10);
-    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.6);
 }
 
-.card h2 {
-    margin: 0.5rem;
-    font-size: 1rem;
-    color: #ffffff
+.cardName {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: aliceblue;
 }
 
 .card img {
@@ -31,25 +32,37 @@
     border-radius: 12px;
 }
 
-.card .cardVote {
-    font-size: 0.85rem;
-    color: #aaa;
+.cardVote {
+    font-size: 0.9em;
+    color: aliceblue;
     display: flex;
     align-items: center;
     text-align: center;
-    gap: 0.3rem;
 }
 
-.cardButtons button {
+.cardButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.watchedbutton {
+    background-color: transparent;
     border: 2px solid white;
-    background: transparent;
-    font-size: 1.1rem;
-    cursor: pointer;
-    margin: 0 0.5rem;
+    color: white;
     padding: 5px;
     border-radius: 8px;
-    transition: all 0.2s ease;
-    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.likebutton {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .cardButtons button:hover {

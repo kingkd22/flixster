@@ -1,6 +1,5 @@
 import MovieCard from "./MovieCard";
-import "./MovieList.css"
-import "./MovieCard.css"
+import "./Favorite-Watched.css"
 
 function Favorites( {movies}) {
     if (!movies) return <p>You have no favorites...</p>
@@ -8,7 +7,7 @@ function Favorites( {movies}) {
     const likedMovies = movies.filter(movie => movie.liked)
 
     return (
-        <div className="grid">
+        <div className="grid Favorites">
             {likedMovies.map((movie) => (
                 <MovieCard 
                     key={movie.id}

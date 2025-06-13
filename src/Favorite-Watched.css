@@ -1,0 +1,34 @@
+.Favorites {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 100px;
+    margin-left: 0;
+    background-image: linear-gradient(to bottom right, black, dimgray, #000000);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+    width: 100%;
+}
+
+.Watched {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 100px;
+    margin-left: 0;
+    background-image: linear-gradient(to bottom right, black, dimgray, #000000);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: aliceblue;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: top;
+    width: 100%;
+    max-width: 1200px;
+}

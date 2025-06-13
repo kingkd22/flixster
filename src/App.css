@@ -11,24 +11,38 @@ body {
 }
 
 .banner {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 999;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
+  height: 80px;
   background-image: linear-gradient(to bottom right, black, dimgray, #000000);
+  color: aliceblue;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  width: 100%;
+}
+
+section {
+  padding-top: 100px;
+  margin-left: 200px;
 }
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
-  height: 100%;
+  height: calc(100% - 80px);
   width: 200px;
   background-color: #1c1c1c;
-  padding-top: 100px;
+  padding-top: 50px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 998;
 }
 
 .sidebar-ul {
@@ -57,7 +71,11 @@ button {
   transition: background-color 0.3s ease;
 }
 
-@media (max-width: 768px) {
+.section {
+  width:100%;
+}
+
+/* @media (max-width: 768px) {
   .MovieCard {
     width: 45%;
   }
@@ -80,4 +98,4 @@ button {
   .SearchForm button {
     width: 100%
   }
-}
+} */
