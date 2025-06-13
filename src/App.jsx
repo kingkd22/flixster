@@ -24,7 +24,7 @@ const App = () => {
       <Router>
         <nav className="sidebar"> 
           <ul className="sidebar-ul">
-            <li><Link to="/nowPlaying">Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><Link to="/favorites">Favorites</Link></li>
             <li><Link to="/watched">Watched</Link></li>
           </ul>
@@ -32,8 +32,7 @@ const App = () => {
 
         <section className='section'>
           <Routes>
-            {/* <Route path="/" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)} />} /> */}
-            <Route path="/nowPlaying" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)}/>} />
+            <Route path="/" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)}/>} />
             <Route path="/favorites" element={<Favorites movies={globalMovies} />} />
             <Route path="/watched" element={<Watched movies={globalMovies}/>} />
           </Routes>
