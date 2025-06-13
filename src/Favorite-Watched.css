@@ -13,10 +13,9 @@
 
 .Watched {
     display: flex;
-    flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding-top: 90px;
+    padding-top: 80px;
     margin-left: 0;
     background-image: linear-gradient(to bottom right, black, dimgray, #000000);
     background-repeat: no-repeat;
