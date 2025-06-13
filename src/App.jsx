@@ -32,7 +32,7 @@ const App = () => {
 
         <section className='section'>
           <Routes>
-            <Route path="/" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)} />} />
+            {/* <Route path="/" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)} />} /> */}
             <Route path="/nowPlaying" element={<MovieList global={(callbackItem) => handleSetGLobalMovies(callbackItem)}/>} />
             <Route path="/favorites" element={<Favorites movies={globalMovies} />} />
             <Route path="/watched" element={<Watched movies={globalMovies}/>} />
